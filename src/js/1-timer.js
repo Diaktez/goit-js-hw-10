@@ -22,6 +22,7 @@ const options = {
   time_24hr: true,
   defaultDate: new Date(),
   minuteIncrement: 1,
+  disableMobile: true,
   onClose(selectedDates) {
     const selectedDate = selectedDates[0];
     const nowTime = new Date();
@@ -40,7 +41,9 @@ const options = {
   },
 };
 
-flatpickr('#datetime-picker', options);
+const fp = flatpickr('#datetime-picker', options);
+fp.input.setAttribute('readonly', true);
+fp.input.addEventListener('focus', e => e.target.blur());
 
 startBtn.addEventListener('click', () => {
   if (!userSelectedDate) return;
